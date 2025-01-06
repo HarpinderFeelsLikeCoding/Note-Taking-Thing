@@ -11,11 +11,9 @@ const MarketPage = () => {
       md:justify-start text-center gap-y-8 flex-1 px-6 pb-10">
         <Heading></Heading>
         <Heroes></Heroes>
-        <div>
+        </div>
           <Footer></Footer>
         </div>
-      </div>
-    </div>
   );  
 }
 
