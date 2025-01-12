@@ -42,7 +42,7 @@ export const Navbar = () => {
             {isAuthenticated && !isLoading &&(
                 <>
                 <Button variant = 'ghost' size='sm' asChild>
-                    <Link href='/documents'>
+                    <Link href = '/documents'>
                     Open your Notebook
                     </Link>
                 </Button>
