@@ -8,7 +8,13 @@ export const Heroes = () => {
                     <Image 
                     src='/documents light.png'
                     fill
-                    className="object-contain"
+                    className="object-contain dark:hidden"
+                    alt="Documents"
+                    ></Image>
+                     <Image 
+                    src='/documents dark.png'
+                    fill
+                    className="object-contain hidden dark:block"
                     alt="Documents"
                     ></Image>
                 </div>
@@ -16,7 +22,13 @@ export const Heroes = () => {
                     <Image 
                     src='/reading light.png'
                     fill
-                    className='object-contain'
+                    className='object-contain dark:hidden'
+                    alt='Reading'
+                    ></Image>
+                    <Image 
+                    src='/reading dark.png'
+                    fill
+                    className='object-contain hidden dark:block'
                     alt='Reading'
                     ></Image>
                 </div>
