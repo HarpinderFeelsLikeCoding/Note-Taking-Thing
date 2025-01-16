@@ -1,21 +1,28 @@
 "use client"
 
 import { cn } from "@/lib/utils";
-import { ChevronsLeft, MenuIcon } from "lucide-react"
+import { ChevronsLeft, MenuIcon, PlusCircle } from "lucide-react"
 import { usePathname } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from 'usehooks-ts';
 import { UserItem } from "./user-item";
+import { useMutation, useQuery } from 'convex/react';
+import { api } from '@/convex/_generated/api';
+import { Item } from "./item";
+import { toast } from "sonner";
 
 export const Navigation = () => {
     const pathname=usePathname();
     const isMobile = useMediaQuery('(max-width 768px)');
+    const create = useMutation(api.documents.create);
 
     const isResizingRef = useRef(false);
     const sidebarRef = useRef<ElementRef<'aside'>>(null);
     const navbarRef = useRef<ElementRef<'div'>>(null);
     const [isResetting, setIsResetting] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(isMobile);
+
+    const documents = useQuery(api.documents.get);
 
     useEffect(() => {
         if (isMobile) {
@@ -93,6 +100,16 @@ export const Navigation = () => {
         }
     }
 
+    const handleCreate = async () => {
+        const promise = create({ title: "Untitled" });
+        toast.promise(promise, {
+            loading: "Creating...",
+            success: "Note created",
+            error: "Failed to create note",
+        }
+        )
+    }
+
     return (
         <>
         <aside 
@@ -112,9 +129,16 @@ export const Navigation = () => {
             </div>
             <div>
                 <UserItem></UserItem>
+                <Item onClick={handleCreate} 
+                label="New page" 
+                icon={PlusCircle}></Item>
             </div>
             <div className='mt-4'>
-                <p>Documents</p>
+                {documents?.map((document) => (
+                    <p key={document._id}>
+                        {document.title}
+                    </p>
+                ))}
             </div>
             <div
             onMouseDown={handleMouseDown}
