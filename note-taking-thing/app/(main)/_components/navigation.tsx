@@ -1,15 +1,16 @@
 "use client"
 
 import { cn } from "@/lib/utils";
-import { ChevronsLeft, MenuIcon, PlusCircle } from "lucide-react"
+import { ChevronsLeft, MenuIcon, PlusCircle, Search, Settings } from "lucide-react"
 import { usePathname } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from 'usehooks-ts';
 import { UserItem } from "./user-item";
-import { useMutation, useQuery } from 'convex/react';
+import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { Item } from "./item";
 import { toast } from "sonner";
+import { DocumentList } from "./document-list";
 
 export const Navigation = () => {
     const pathname=usePathname();
@@ -21,8 +22,6 @@ export const Navigation = () => {
     const navbarRef = useRef<ElementRef<'div'>>(null);
     const [isResetting, setIsResetting] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(isMobile);
-
-    const documents = useQuery(api.documents.get);
 
     useEffect(() => {
         if (isMobile) {
@@ -129,16 +128,26 @@ export const Navigation = () => {
             </div>
             <div>
                 <UserItem></UserItem>
-                <Item onClick={handleCreate} 
+                <Item
+                label='Search'
+                icon={Search}
+                isSearch
+                onClick={()=>{}}
+                />
+                <Item
+                label='Settings'
+                icon={Settings}
+                onClick={()=>{}}
+                />
+                <Item 
+                onClick={handleCreate} 
                 label="New page" 
-                icon={PlusCircle}></Item>
+                icon={PlusCircle}
+                />
+
             </div>
             <div className='mt-4'>
-                {documents?.map((document) => (
-                    <p key={document._id}>
-                        {document.title}
-                    </p>
-                ))}
+                <DocumentList></DocumentList>
             </div>
             <div
             onMouseDown={handleMouseDown}
