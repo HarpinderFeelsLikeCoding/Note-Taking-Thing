@@ -178,7 +178,7 @@ export const Navigation = () => {
             isMobile && 'left-0 w-full'
         )}
         >
-            <nav className='bg-trasnparent px-3 py-3 w-full'
+            <nav className='bg-transparent px-3 py-3 w-full'
             >
                 {isCollapsed && <MenuIcon className='h-6 w-6 text-muted-foreground' role='button' onClick={resetWidth}></MenuIcon>}
             </nav>

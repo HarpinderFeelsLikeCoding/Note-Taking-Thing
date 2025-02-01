@@ -34,13 +34,13 @@ export const ConfirmModal = ({
             <AlertDialogTrigger onClick={(e) => e.stopPropagation()} asChild>
                 {children}
             </AlertDialogTrigger>
-            <AlertDialogContent>
+            <AlertDialogContent className="z-[100000]">
                 <AlertDialogHeader>
                     <AlertDialogTitle>
-                        Are you absolutely sure? This can't be reversed
+                        Are you absolutely sure?
                     </AlertDialogTitle>
                     <AlertDialogDescription>
-                        I'm not kidding, like we can't undo this
+                        I'm not kidding, like we can't undo this.
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
