@@ -4,6 +4,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ConvexClientProvider } from "@/components/providers/convex-provider";
 import { Toaster } from 'sonner';
+import { ModeToggle } from "@/components/mode-toggle";
+import { ModalProvider } from "@/components/providers/modal-provider";
 
 
 const geistSans = Geist({
@@ -52,6 +54,7 @@ export default function RootLayout({
           disableTransitionOnChange
           storageKey="note-taking-thingy-theme">
             <Toaster position="bottom-center"/>
+            <ModalProvider />
             {children}
           </ThemeProvider>
         </ConvexClientProvider>

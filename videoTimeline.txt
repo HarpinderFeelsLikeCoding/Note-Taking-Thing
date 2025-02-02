@@ -8,3 +8,4 @@
 1/20 3:36
 1/21 4:03 -> 4:20 -> 4:25 SOMETHING IS WRONG AT THE point where we retireve the notes from the trash
 2/1 4:40  lots of erros on search-command
+2/2 5:00 navbar now
