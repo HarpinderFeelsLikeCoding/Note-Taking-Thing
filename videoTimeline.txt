@@ -10,3 +10,4 @@
 2/1 4:40  lots of erros on search-command
 2/2 5:00 navbar now
 2/6 5:19 
+2/14 6
