@@ -11,6 +11,8 @@ import { useState } from 'react';
 import { useEdgeStore } from '@/lib/edgestore';
 import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
+import { useParams } from 'next/navigation';
+import { Id } from '@/convex/_generated/dataModel';
 
 export const CoverImageModal = () => {
     const params = useParams();
@@ -20,17 +22,30 @@ export const CoverImageModal = () => {
     const coverImage = useCoverImage();
     const { edgestore } = useEdgeStore();
 
+    const onClose = () =>{
+        setFile(undefined);
+        setIsSubmitting(false);
+        coverImage.onClose();
+    }
+
     const onChange = async (file?: File) =>{
         if (file) {
             setIsSubmitting(true);
             setFile(file);
 
-            const res = await edgestore.publicFiles.upload({
-                file
+            const res = await  edgestore.publicFiles.upload({
+                file,
+                options: {
+                    replaceTargetUrl: coverImage.url
+                }
             });
-            await update ({
 
+            await update ({
+                id: params.documentId as Id<'documents'>,
+                coverImage: res.url
             })
+
+            onClose();
         }
     }
 
@@ -42,9 +57,12 @@ export const CoverImageModal = () => {
                         Cover Image
                     </h2>
                 </DialogHeader>
-                <div>
-                    Todo Upload Image
-                </div>
+                <SingleImageDropzone
+                className='w-full outline-none'
+                onChange={onChange}
+                value={file}
+                disabled={isSubmitting}
+                />
             </DialogContent>
         </Dialog>
     )
