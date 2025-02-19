@@ -16,12 +16,13 @@ import { TrashBox } from "./trash-box";
 import { useSearch } from "@/hooks/use-search";
 import { useSettings } from "@/hooks/use-settings";
 import { Navbar } from "./navbar";
+import { useRouter } from "next/navigation";
 
 
 export const Navigation = () => {
     const settings = useSettings();
     const search = useSearch();
-    const params = useParams();
+    const params = useParams() as { documentId?: string };
     const pathname = usePathname();
     const isMobile = useMediaQuery('(max-width 768px)');
     const create = useMutation(api.documents.create);
@@ -31,6 +32,7 @@ export const Navigation = () => {
     const navbarRef = useRef<ElementRef<'div'>>(null);
     const [isResetting, setIsResetting] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(isMobile);
+    const router = useRouter();
 
     useEffect(() => {
         if (isMobile) {
@@ -109,7 +111,8 @@ export const Navigation = () => {
     }
 
     const handleCreate = async () => {
-        const promise = create({ title: "Untitled" });
+        const promise = create({ title: "Untitled" })
+        .then((documentId) => router.push(`/documents/${documentId}`));
         toast.promise(promise, {
             loading: "Creating...",
             success: "Note created",

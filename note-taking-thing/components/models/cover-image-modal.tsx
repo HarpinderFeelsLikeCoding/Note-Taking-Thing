@@ -15,7 +15,7 @@ import { useParams } from 'next/navigation';
 import { Id } from '@/convex/_generated/dataModel';
 
 export const CoverImageModal = () => {
-    const params = useParams();
+    const params = useParams() as { documentId?: string };
     const update = useMutation(api.documents.update);
     const [file, setFile] = useState<File>();
     const [isSubmitting, setIsSubmitting] = useState(false);

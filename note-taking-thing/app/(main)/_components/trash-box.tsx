@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import { ConfirmModal } from "@/components/models/confirm-model";
 import { Spinner } from "@/components/spinner";
@@ -13,7 +13,7 @@ import { toast } from "sonner";
 
 export const TrashBox = () => {
     const router = useRouter();
-    const params = useParams();
+    const params = useParams() as { documentId?: string };
     const documents = useQuery(api.documents.getTrash);
     const restore = useMutation(api.documents.restore);
     const remove = useMutation(api.documents.remove);
@@ -42,7 +42,7 @@ export const TrashBox = () => {
         });
     }
 
-    const onRemove = (
+    const onRemove = async (
         documentId: Id<'documents'>
     ) => {
         const promise = remove({ id: documentId });
@@ -52,6 +52,7 @@ export const TrashBox = () => {
             success: 'Deleted note!',
             error: 'Failed to delete note'
         });
+
         if (params.documentId === documentId) {
             router.push('/documents');
         }

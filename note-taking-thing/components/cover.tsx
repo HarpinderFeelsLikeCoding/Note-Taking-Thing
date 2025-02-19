@@ -21,7 +21,7 @@ export const Cover = ({
     preview
 }: CoverImageProps) => {
     const { edgestore } = useEdgeStore();
-    const params = useParams();
+    const params = useParams() as { documentId?: string };
     const coverImage = useCoverImage();
     const removeCoverImage = useMutation(api.documents.removeCoverImage);
 

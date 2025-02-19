@@ -20,7 +20,7 @@ export const DocumentList = ({
     parentDocumentId,
     level=0
 }: DocumentListProps) => {
-    const params = useParams();
+    const params = useParams() as { documentId?: string };
     const router = useRouter();
     const [expanded, setExpanded] = useState<Record<string,boolean>>({});
 
