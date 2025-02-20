@@ -10,7 +10,7 @@ This project was previously deployed on **Vercel** for demonstration purposes.
 This is the landing page where you will see before you log in.
 
 
-![Signed In](signed in.png)
+![Signed in](signed-in.png)
 This is what you will see when you log in.
 
 
